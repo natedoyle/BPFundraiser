@@ -4,11 +4,15 @@
 import os
 import stripe
 
-from flask import Flask, redirect
+from flask import Flask, redirect, send_from_directory
 
 app = Flask(__name__)
 
 stripe.api_key = 'sk_test_4eC39HqLyjWDarjtT1zdp7dc'
+
+@app.route('/')
+def send_js():
+    return send_from_directory('', 'index.html')
 
 @app.route('/create-checkout-session', methods=['POST'])
 def create_checkout_session():
