@@ -24,8 +24,8 @@ def create_checkout_session():
       'quantity': 1,
     }],
     mode='payment',
-    success_url='https://example.com/success',
-    cancel_url='https://example.com/cancel',
+    success_url='http://localhost:4242/success.html',
+    cancel_url='http://localhost:4242/cancel.html',
   )
 
   return redirect(session.url, code=303)
