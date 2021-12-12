@@ -4,15 +4,27 @@
 import os
 import stripe
 
-from flask import Flask, redirect, send_from_directory
+from flask import Flask, redirect, send_from_directory, render_template
 
 app = Flask(__name__)
 
 stripe.api_key = 'sk_test_4eC39HqLyjWDarjtT1zdp7dc'
 
 @app.route('/')
-def send_js():
+def send_root():
     return send_from_directory('', 'index.html')
+
+@app.route('/success.html', methods=['GET'])
+def send_success():
+  return send_from_directory('pages', 'success.html')
+
+@app.route('/cancel.html')
+def send_cancel():
+  return send_from_directory('', 'cancel.html')
+
+@app.errorhandler(404)
+def page_not_found(e):
+  return send_from_directory('', '404.html')
 
 @app.route('/create-checkout-session', methods=['POST'])
 def create_checkout_session():
